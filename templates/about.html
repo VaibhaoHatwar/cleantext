@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}About CleanText 🧹{% endblock %}
+
+{% block content %}
+<h1 class="text-center text-primary mb-3">About CleanText 🧹</h1>
+<p class="lead text-center">CleanText is a simple, interactive text utility tool built using Django 5.2.  
+It helps you remove punctuation, capitalize text, remove extra spaces or newlines, and count characters.</p>
+
+<div class="text-center mt-3">
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+</div>
+{% endblock %}

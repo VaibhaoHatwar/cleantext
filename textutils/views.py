@@ -65,3 +65,9 @@ def analyze(request):
 
     params = {'purpose': purpose_text, 'analyzed_text': analyzed}
     return render(request, 'analyze.html', params)
+
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')

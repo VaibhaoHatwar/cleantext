@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - CleanText 🧹{% endblock %}
+
+{% block content %}
+<h1 class="text-center text-primary mb-3">Contact</h1>
+<p class="lead text-center">You can reach out via email or connect on LinkedIn:</p>
+
+<div class="text-center mt-3">
+  <a href="mailto:vaibhaohatwar.works@gmail.com" class="btn btn-primary me-2">Email Me</a>
+  <a href="https://www.linkedin.com/in/vaibhao-hatwar" target="_blank" class="btn btn-info text-white">LinkedIn</a>
+</div>
+
+<div class="text-center mt-4">
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+</div>
+{% endblock %}

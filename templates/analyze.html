@@ -1,60 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CleanText 🧹 - Analysis Result</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 2rem;
-      color: #333;
-      text-align: center;
-    }
-    h1 {
-      color: #007bff;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      color: #333;
-      margin-top: 1rem;
-      font-weight: normal;
-    }
-    .result-box {
-      background: white;
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: left;
-      white-space: pre-wrap; /* preserve line breaks */
-      word-wrap: break-word;
-    }
-    a.back {
-      display: inline-block;
-      margin-top: 1rem;
-      background: #007bff;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-    a.back:hover {
-      background: #0056b3;
-    }
-  </style>
-</head>
-<body>
-  <h1>CleanText 🧹</h1>
-  <h2>{{ purpose }}</h2>
+{% extends 'base.html' %}
 
-  <div class="result-box">
-    {{ analyzed_text }}
-  </div>
+{% block title %}CleanText 🧹 - Analyze{% endblock %}
 
-  <a href="/" class="back">Back to Home</a>
-</body>
-</html>
+{% block content %}
+<h1 class="text-center text-primary">CleanText 🧹</h1>
+<h2 class="text-center">Your analyzed text - {{ purpose }}</h2>
+
+<div class="card p-3 mt-3 mx-auto" style="max-width: 700px;">
+  <p class="mb-0">{{ analyzed_text }}</p>
+</div>
+
+<div class="text-center mt-4">
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+</div>
+{% endblock %}
