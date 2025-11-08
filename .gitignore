@@ -1,0 +1,24 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Virtual environment #
+env/
+venv/
+ENV/
+.env
+*.env
+
+# VS Code #
+.vscode/
+
+# macOS / Windows #
+.DS_Store
+Thumbs.db
+
+# Python cache #
+*.py[cod]
+*$py.class
