@@ -1,8 +1,11 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 # Create your views here.
-def index(request):
-    return HttpResponse("<h1>Welcome to 🧹CleanText</h1><p>This is the home page.</p><a href='about'>About Page</a>")
+def home(request):
+    return render(request, 'index.html')
 
-def about(request):
-    return HttpResponse("<h2>About 🧹CleanText</h2><p>This app helps clean your text easily!</p><a href='/'>Back to Home Page</a>")
+def analyze(request):
+    djtext = request.GET.get('text', '')
+    analyzed = djtext
+    params = {'purpose': 'Analyzed Text', 'analyzed_text': analyzed}
+    return render(request, 'analyze.html', params)

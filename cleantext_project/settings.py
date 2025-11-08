@@ -55,7 +55,7 @@ ROOT_URLCONF = 'cleantext_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # ✅ point to root templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
