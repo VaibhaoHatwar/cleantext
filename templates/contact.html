@@ -3,15 +3,32 @@
 {% block title %}Contact - CleanText 🧹{% endblock %}
 
 {% block content %}
-<h1 class="text-center text-primary mb-3">Contact</h1>
-<p class="lead text-center">You can reach out via email or connect on LinkedIn:</p>
+<div class="container my-3">
+  <div class="text-center mb-5">
+    <h1 class="display-4 text-primary fw-bold">Contact CleanText 🧹</h1>
+    <p class="lead text-muted">Have questions or feedback? Reach out via email or connect on LinkedIn.</p>
+  </div>
 
-<div class="text-center mt-3">
-  <a href="mailto:vaibhaohatwar.works@gmail.com" class="btn btn-primary me-2">Email Me</a>
-  <a href="https://www.linkedin.com/in/vaibhao-hatwar" target="_blank" class="btn btn-info text-white">LinkedIn</a>
-</div>
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="p-4 shadow-sm rounded bg-white text-center h-100">
+        <h4 class="text-secondary mb-3">📧 Email</h4>
+        <p class="text-muted">Send your queries or suggestions directly to my inbox.</p>
+        <a href="mailto:vaibhaohatwar.works@gmail.com" class="btn btn-primary btn-hover mt-2">Email Me</a>
+      </div>
+    </div>
 
-<div class="text-center mt-4">
-  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+    <div class="col-md-5">
+      <div class="p-4 shadow-sm rounded bg-white text-center h-100">
+        <h4 class="text-secondary mb-3">💼 LinkedIn</h4>
+        <p class="text-muted">Connect professionally and check out my profile for updates.</p>
+        <a href="https://www.linkedin.com/in/vaibhao-hatwar" target="_blank" class="btn btn-info text-white btn-hover mt-2">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="{% url 'home' %}" class="btn btn-primary btn-hover">Back to Home</a>
+  </div>
 </div>
 {% endblock %}

@@ -3,20 +3,85 @@
 {% block title %}CleanText 🧹 - Home{% endblock %}
 
 {% block content %}
-<h1 class="text-center text-primary">CleanText 🧹</h1>
-<p class="text-center">Enter your text below and choose a utility:</p>
+<div class="container my-3">
 
-<form action="{% url 'analyze' %}" method="get" class="mx-auto" style="max-width: 500px;">
-  <textarea name="text" class="form-control mb-3" placeholder="Paste your text here..."></textarea>
-
-  <div class="mb-3 text-start">
-    <div class="form-check"><input class="form-check-input" type="checkbox" name="removepunc"><label class="form-check-label">Remove Punctuation</label></div>
-    <div class="form-check"><input class="form-check-input" type="checkbox" name="capitalizefirst"><label class="form-check-label">Capitalize First Letter</label></div>
-    <div class="form-check"><input class="form-check-input" type="checkbox" name="newlineremove"><label class="form-check-label">Remove New Lines</label></div>
-    <div class="form-check"><input class="form-check-input" type="checkbox" name="spaceremove"><label class="form-check-label">Remove Extra Spaces</label></div>
-    <div class="form-check"><input class="form-check-input" type="checkbox" name="charcount"><label class="form-check-label">Count Characters</label></div>
+  <!-- Hero Section -->
+  <div class="text-center mb-5">
+    <h1 class="display-4 text-primary fw-bold">CleanText 🧹</h1>
+    <p class="lead text-muted">Paste your text below and select the utilities you want to apply. Clean and transform your text effortlessly!</p>
   </div>
 
-  <button type="submit" class="btn btn-primary w-100">Analyze Text</button>
-</form>
+  <!-- Textarea -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-8">
+      <form action="{% url 'analyze' %}" method="get">
+        <textarea name="text" class="form-control shadow-sm rounded mb-3" rows="6" placeholder="Paste your text here...">{{ request.GET.text }}</textarea>
+
+        <!-- Utilities -->
+        <div class="row gx-3 gy-2 mb-3">
+          <div class="col-md-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="removepunc" {% if request.GET.removepunc %}checked{% endif %}>
+              <label class="form-check-label">Remove Punctuation</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="capitalizeall" {% if request.GET.capitalizeall %}checked{% endif %}>
+              <label class="form-check-label">Uppercase</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="lowercaseall" {% if request.GET.lowercaseall %}checked{% endif %}>
+              <label class="form-check-label">Lowercase</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="capitalizefirst" {% if request.GET.capitalizefirst %}checked{% endif %}>
+              <label class="form-check-label">Capitalize First Letter</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="newlineremove" {% if request.GET.newlineremove %}checked{% endif %}>
+              <label class="form-check-label">Remove New Lines</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="spaceremove" {% if request.GET.spaceremove %}checked{% endif %}>
+              <label class="form-check-label">Remove Extra Spaces</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="charcount" {% if request.GET.charcount %}checked{% endif %}>
+              <label class="form-check-label">Count Characters</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-hover w-100">Analyze Text</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Analysis Result -->
+  {% if analyzed_text %}
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+      <div class="p-4 shadow-sm rounded bg-white">
+        <h4 class="text-success mb-3">Analysis Result</h4>
+        <p><strong>Purpose:</strong> {{ purpose }}</p>
+        <p><strong>Final Text:</strong></p>
+        <pre class="bg-light p-2 rounded">{{ analyzed_text }}</pre>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
 {% endblock %}

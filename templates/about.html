@@ -3,11 +3,41 @@
 {% block title %}About CleanText 🧹{% endblock %}
 
 {% block content %}
-<h1 class="text-center text-primary mb-3">About CleanText 🧹</h1>
-<p class="lead text-center">CleanText is a simple, interactive text utility tool built using Django 5.2.  
-It helps you remove punctuation, capitalize text, remove extra spaces or newlines, and count characters.</p>
+<div class="container my-3">
+  <div class="text-center mb-5">
+    <h1 class="display-4 text-primary fw-bold">About CleanText 🧹</h1>
+    <p class="lead text-muted">A simple, elegant text utility tool built with Django to make your text clean and structured.</p>
+  </div>
 
-<div class="text-center mt-3">
-  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+  <div class="row gx-5 gy-4 justify-content-center">
+    <div class="col-md-5">
+      <div class="p-4 shadow-sm rounded bg-white h-100">
+        <h4 class="text-secondary mb-3">Remove Punctuation</h4>
+        <p class="text-muted">Quickly strip out punctuation marks from your text to make it clean and readable.</p>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="p-4 shadow-sm rounded bg-white h-100">
+        <h4 class="text-secondary mb-3">Capitalize Text</h4>
+        <p class="text-muted">Convert your text to uppercase, lowercase, or capitalize the first letter effortlessly.</p>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="p-4 shadow-sm rounded bg-white h-100">
+        <h4 class="text-secondary mb-3">Remove Spaces & Newlines</h4>
+        <p class="text-muted">Clean up extra spaces and remove newlines for a neat, continuous text flow.</p>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="p-4 shadow-sm rounded bg-white h-100">
+        <h4 class="text-secondary mb-3">Character Count</h4>
+        <p class="text-muted">Keep track of your text length in characters for writing, coding, or content creation purposes.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="{% url 'home' %}" class="btn btn-primary btn-hover">Back to Home</a>
+  </div>
 </div>
 {% endblock %}

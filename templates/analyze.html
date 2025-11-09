@@ -1,16 +1,42 @@
 {% extends 'base.html' %}
 
-{% block title %}CleanText 🧹 - Analyze{% endblock %}
+{% block title %}Analyze Text - CleanText 🧹{% endblock %}
 
 {% block content %}
-<h1 class="text-center text-primary">CleanText 🧹</h1>
-<h2 class="text-center">Your analyzed text - {{ purpose }}</h2>
+<div class="container my-3">
 
-<div class="card p-3 mt-3 mx-auto" style="max-width: 700px;">
-  <p class="mb-0">{{ analyzed_text }}</p>
-</div>
+  <!-- Header -->
+  <div class="text-center mb-4">
+    <h1 class="display-4 text-primary fw-bold">CleanText 🧹 - Analyzed Text</h1>
+    <p class="lead text-muted">Your text has been processed based on the utilities you selected.</p>
+  </div>
 
-<div class="text-center mt-4">
-  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+  <!-- Single Card -->
+  <div class="p-4 shadow-sm rounded bg-white">
+
+    <!-- Purpose -->
+    <h4 class="text-secondary mb-3">Purpose</h4>
+    <p class="text-muted">{{ purpose }}</p>
+
+    <hr>
+
+    <!-- Analyzed Text -->
+    <h4 class="text-secondary mb-3">Final Text</h4>
+    <div class="p-2 bg-light rounded" style="min-height: 100px; overflow-y: auto;">
+      <pre class="text-muted mb-0">{{ analyzed_text }}</pre>
+    </div>
+
+    {% if 'Character Count' in purpose %}
+    <hr>
+    <h4 class="text-secondary mb-3">Character Count</h4>
+    <p class="text-muted">{{ analyzed_text|length }} characters</p>
+    {% endif %}
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+      <a href="{% url 'home' %}" class="btn btn-primary btn-hover">Back to Home</a>
+    </div>
+
+  </div>
 </div>
 {% endblock %}

@@ -1,70 +1,88 @@
 from django.shortcuts import render
+import string
 
-def home(request):
-    """
-    Render the homepage where users enter text and select utilities.
-    """
-    return render(request, 'index.html')
+# --- Utility functions ---
+def remove_punctuation(text):
+    """Remove all punctuation characters from the text."""
+    return "".join(char for char in text if char not in string.punctuation)
 
+def remove_newlines(text):
+    """Remove all newline and carriage return characters."""
+    return text.replace("\n", "").replace("\r", "")
 
+def remove_extra_spaces(text):
+    """Replace multiple spaces with a single space."""
+    return " ".join(text.split())
+
+# --- Main analyze view ---
 def analyze(request):
     """
-    Analyze the text based on selected utilities:
+    Analyze text based on selected utilities:
     - Remove punctuation
+    - Uppercase all
+    - Lowercase all
     - Capitalize first letter
     - Remove new lines
     - Remove extra spaces
     - Count characters
     """
-    # Get text from the form or use 'off' as default
-    djtext = request.GET.get('text') or 'off'
+    djtext = request.GET.get('text', '')  # Get text from form
 
-    # Check which checkboxes were selected
+    # Get checkbox values
     removepunc = request.GET.get('removepunc')
+    capitalizeall = request.GET.get('capitalizeall')
+    lowercaseall = request.GET.get('lowercaseall')
     capitalizefirst = request.GET.get('capitalizefirst')
     newlineremove = request.GET.get('newlineremove')
     spaceremove = request.GET.get('spaceremove')
     charcount = request.GET.get('charcount')
 
     analyzed = djtext
+    purpose_list = []
 
-    # Remove punctuation
+    # --- Text transformations ---
     if removepunc:
-        punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~`|'''
-        analyzed = "".join(char for char in analyzed if char not in punctuations)
+        analyzed = remove_punctuation(analyzed)
+        purpose_list.append("Removed Punctuations")
 
-    # Capitalize first letter of the text
-    if capitalizefirst:
+    if newlineremove:
+        analyzed = remove_newlines(analyzed)
+        purpose_list.append("Removed New Lines")
+
+    if spaceremove:
+        analyzed = remove_extra_spaces(analyzed)
+        purpose_list.append("Removed Extra Spaces")
+
+    # --- Case transformations ---
+    if capitalizeall and lowercaseall:
+        analyzed = analyzed.upper()
+        purpose_list.append("Capitalized All Letters (Lowercase ignored)")
+    elif capitalizeall:
+        analyzed = analyzed.upper()
+        purpose_list.append("Capitalized All Letters")
+    elif lowercaseall:
+        analyzed = analyzed.lower()
+        purpose_list.append("Lowercase All Letters")
+
+    if capitalizefirst and not capitalizeall:
         analyzed = analyzed.capitalize()
+        purpose_list.append("Capitalized First Letter")
 
-    # Remove new lines
-    if newlineremove:
-        analyzed = analyzed.replace("\n", "").replace("\r", "")
-
-    # Remove extra spaces
-    if spaceremove:
-        analyzed = " ".join(analyzed.split())
-
-    # Count characters
-    purpose = []
-    if removepunc:
-        purpose.append("Removed Punctuations")
-    if capitalizefirst:
-        purpose.append("Capitalized First Letter")
-    if newlineremove:
-        purpose.append("Removed New Lines")
-    if spaceremove:
-        purpose.append("Removed Extra Spaces")
+    # --- Character count ---
     if charcount:
-        purpose.append(f"Character Count: {len(analyzed)}")
+        purpose_list.append(f"Character Count: {len(analyzed)}")
 
-    if not purpose:
-        purpose_text = "No changes applied"
-    else:
-        purpose_text = ", ".join(purpose)
+    # Purpose summary
+    purpose_text = ", ".join(purpose_list) if purpose_list else "No changes applied"
 
-    params = {'purpose': purpose_text, 'analyzed_text': analyzed}
-    return render(request, 'analyze.html', params)
+    return render(request, 'analyze.html', {
+        'purpose': purpose_text,
+        'analyzed_text': analyzed
+    })
+
+# --- Other views ---
+def home(request):
+    return render(request, 'index.html')
 
 def about(request):
     return render(request, 'about.html')
