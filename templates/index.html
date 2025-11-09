@@ -14,50 +14,51 @@
   <!-- Textarea -->
   <div class="row justify-content-center mb-4">
     <div class="col-md-8">
-      <form action="{% url 'analyze' %}" method="get">
-        <textarea name="text" class="form-control shadow-sm rounded mb-3" rows="6" placeholder="Paste your text here...">{{ request.GET.text }}</textarea>
+      <form action="{% url 'analyze' %}" method="post">
+        {% csrf_token %}
+        <textarea name="text" class="form-control shadow-sm rounded mb-3" rows="6" placeholder="Paste your text here...">{{ request.POST.text }}</textarea>
 
         <!-- Utilities -->
         <div class="row gx-3 gy-2 mb-3">
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="removepunc" {% if request.GET.removepunc %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="removepunc" {% if request.POST.removepunc %}checked{% endif %}>
               <label class="form-check-label">Remove Punctuation</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="capitalizeall" {% if request.GET.capitalizeall %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="capitalizeall" {% if request.POST.capitalizeall %}checked{% endif %}>
               <label class="form-check-label">Uppercase</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="lowercaseall" {% if request.GET.lowercaseall %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="lowercaseall" {% if request.POST.lowercaseall %}checked{% endif %}>
               <label class="form-check-label">Lowercase</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="capitalizefirst" {% if request.GET.capitalizefirst %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="capitalizefirst" {% if request.POST.capitalizefirst %}checked{% endif %}>
               <label class="form-check-label">Capitalize First Letter</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="newlineremove" {% if request.GET.newlineremove %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="newlineremove" {% if request.POST.newlineremove %}checked{% endif %}>
               <label class="form-check-label">Remove New Lines</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="spaceremove" {% if request.GET.spaceremove %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="spaceremove" {% if request.POST.spaceremove %}checked{% endif %}>
               <label class="form-check-label">Remove Extra Spaces</label>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="charcount" {% if request.GET.charcount %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="charcount" {% if request.POST.charcount %}checked{% endif %}>
               <label class="form-check-label">Count Characters</label>
             </div>
           </div>
@@ -68,20 +69,5 @@
       </form>
     </div>
   </div>
-
-  <!-- Analysis Result -->
-  {% if analyzed_text %}
-  <div class="row justify-content-center mt-4">
-    <div class="col-md-8">
-      <div class="p-4 shadow-sm rounded bg-white">
-        <h4 class="text-success mb-3">Analysis Result</h4>
-        <p><strong>Purpose:</strong> {{ purpose }}</p>
-        <p><strong>Final Text:</strong></p>
-        <pre class="bg-light p-2 rounded">{{ analyzed_text }}</pre>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-
 </div>
 {% endblock %}

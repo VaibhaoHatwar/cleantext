@@ -26,16 +26,16 @@ def analyze(request):
     - Remove extra spaces
     - Count characters
     """
-    djtext = request.GET.get('text', '')  # Get text from form
+    djtext = request.POST.get('text', '')  # Get text from form
 
     # Get checkbox values
-    removepunc = request.GET.get('removepunc')
-    capitalizeall = request.GET.get('capitalizeall')
-    lowercaseall = request.GET.get('lowercaseall')
-    capitalizefirst = request.GET.get('capitalizefirst')
-    newlineremove = request.GET.get('newlineremove')
-    spaceremove = request.GET.get('spaceremove')
-    charcount = request.GET.get('charcount')
+    removepunc = request.POST.get('removepunc')
+    capitalizeall = request.POST.get('capitalizeall')
+    lowercaseall = request.POST.get('lowercaseall')
+    capitalizefirst = request.POST.get('capitalizefirst')
+    newlineremove = request.POST.get('newlineremove')
+    spaceremove = request.POST.get('spaceremove')
+    charcount = request.POST.get('charcount')
 
     analyzed = djtext
     purpose_list = []
